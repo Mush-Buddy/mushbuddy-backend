@@ -6,6 +6,12 @@ const postSchema = new mongoose.Schema({
         required: true,
         default: 'Title'
     },
+    mushroom:{
+        type: mongoose.Types.ObjectId, 
+        required: true,
+        ref: 'mushroom',
+        default: "undefined"
+    },
     content: {
         type: String,
         required: true,

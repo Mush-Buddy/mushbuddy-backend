@@ -42,8 +42,8 @@ req.body = { field_to_update : update }
 Returns - Update status */
 router.patch('/update', verifyToken, async (req, res) => {
     try {
-        const { avatar, aboutme } = req.body
-        await Users.findOneAndUpdate({_id: req.user._id}, {avatar, aboutme})
+        const { avatar, state, city, aboutme, firstName, lastName } = req.body
+        await Users.findOneAndUpdate({_id: req.user._id}, {avatar, state, city, aboutme, firstName, lastName})
         res.json({msg: "Updated"})
     } catch (err) {
         return res.status(500).json({msg: err.message})

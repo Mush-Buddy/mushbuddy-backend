@@ -22,6 +22,28 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Free-Download.png'
     },
+    firstName:{
+        type: String,
+        required: true,
+        trim: true,
+        maxlength: 25,
+    },
+    lastName:{
+        type: String,
+        required: true,
+        trim: true,
+        maxlength: 25,
+    },
+    state:{
+        type: String,
+        required: true,
+        trim: true,
+    },
+    city:{
+        type: String,
+        required: true,
+        trim: true,
+    },
     aboutme: {
         type: String, 
         default: '',
