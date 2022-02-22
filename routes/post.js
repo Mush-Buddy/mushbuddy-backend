@@ -36,6 +36,32 @@ router.post('/',verifyToken, async (req, res) => {
     }
 })
 
+/*
+Getposts for a userid
+req.query = {
+    page: pages num to get
+    limit: number of posts to get for the page
+return - subset of posts sorted in order */
+router.get('/:id', verifyToken, async (req, res) => {
+    try {
+        page = req.query.page * 1  || 1
+        limit = req.query.limit * 1 || 10
+        skip = (page - 1) * limit
+        search_field = [req.params.id]
+        search = Posts.find({
+            user: search_field
+        }).skip(skip).limit(limit)
+        const posts = await search.sort('-createdAt')
+        .populate("user", "avatar username")
+
+        res.json({
+            postlength: posts.length,
+            posts
+        })
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+})
 
 /* getPosts, return posts for user and following
 req.query = {
@@ -45,8 +71,8 @@ req.query = {
 return - subset of posts sorted in order */
 router.get('/', verifyToken, async (req, res) => {
     try {
-        page = req.query.page || 1
-        limit = req.query.limit || 10
+        page = req.query.page * 1 || 1
+        limit = req.query.limit * 1 || 10
         skip = (page - 1) * limit
         includeFollowing = req.query.includeFollowing || 1
         search_field = [...req.user.following, req.user._id]
@@ -67,6 +93,8 @@ router.get('/', verifyToken, async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 })
+
+
 
 /* updatePost, update a post by postid
 Must be user's post to update

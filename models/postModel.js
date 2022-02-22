@@ -8,9 +8,7 @@ const postSchema = new mongoose.Schema({
     },
     mushroom:{
         type: mongoose.Types.ObjectId, 
-        required: true,
         ref: 'mushroom',
-        default: "undefined"
     },
     content: {
         type: String,

@@ -6,6 +6,7 @@ const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/post");
 const badgeRoute = require("./routes/badge");
+const catalogRoute = require("./routes/catalog");
 const cors = require("cors");
 
 dotenv.config()
@@ -26,6 +27,7 @@ app.use("/auth", authRoute);
 app.use("/users", userRoute);
 app.use("/posts", postRoute);
 app.use("/badges", badgeRoute)
+app.use("/catalog",catalogRoute);
 
 app.get("/",(req,res)=>{
   res.send("Server home")

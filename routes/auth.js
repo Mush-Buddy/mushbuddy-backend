@@ -13,9 +13,13 @@ Returns - A copy of saved user */
 router.post("/register", async (req, res) => {
     try{
         if(req.body.password.length < 6){
-            return res.status(501).json("Length of password must be at least 6 characters.")
+            return res.status(501).json({msg:"Length of password must be at least 6 characters."})
         }
         const newUser = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            state: req.body.state,
+            city: req.body.city,
             username: req.body.username,
             email: req.body.email,
             password: CryptoJS.AES.encrypt(
@@ -62,7 +66,7 @@ router.post('/login', async (req, res) => {
         process.env.JWT_SEC,
             {expiresIn:"1d"}
         );
-        res.status(200).json({...user._doc, password:'', accessToken});
+        res.status(200).json({user: {...user._doc, password:''}, accessToken});
     }catch(err){
         res.status(500).json({msg:err.message});
     }
