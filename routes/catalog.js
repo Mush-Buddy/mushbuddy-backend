@@ -11,10 +11,10 @@ return - subset of catalog */
 router.get('/', verifyToken, async (req, res) => {
     try {
         page = req.query.page * 1|| 1
-        limit = req.query.limit * 1|| 10
+        limit = req.query.limit * 1|| 9
         skip = (page - 1) * limit
         search = Mushrooms.find({}).skip(skip).limit(limit)
-        const catalog = await search.sort('-createdAt')
+        const catalog = await search
         res.json({
             cataloglength: catalog.length,
             catalog,
