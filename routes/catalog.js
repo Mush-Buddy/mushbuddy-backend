@@ -27,4 +27,21 @@ router.get('/', verifyToken, async (req, res) => {
     }
 })
 
+/* Search for a mushroom by its common name (nameCommon)
+Call format - 
+req.query = {
+    nameCommon = Common name to search by
+    limit = max_num_to_return, default top 10 }
+Returns - Array of matches to common name */
+// router.get('/', verifyToken, async (req, res) => {
+//     try {
+//         req.query.limit = req.query.limit || 10
+//         const mushrooms = await Mushrooms.find({ nameCommon: { $regex: req.query.nameCommon } })
+//             .limit(req.query.limit).select("nameCommon nameScientific description images")
+//         res.json({ mushrooms })
+//     } catch (err) {
+//         return res.status(500).json({ msg: err.message })
+//     }
+// })
+
 module.exports = router

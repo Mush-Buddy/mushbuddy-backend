@@ -27,12 +27,12 @@ app.use("/auth", authRoute);
 app.use("/users", userRoute);
 app.use("/posts", postRoute);
 app.use("/badges", badgeRoute)
-app.use("/catalog",catalogRoute);
+app.use("/catalog", catalogRoute);
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
   res.send("Server home")
 })
 
 app.listen(5000, () => {
-    console.log("Server is up");
-  });
+  console.log("Server is up");
+});
