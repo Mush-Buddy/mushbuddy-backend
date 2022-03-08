@@ -15,6 +15,16 @@ const postSchema = new mongoose.Schema({
         required: true,
         default: 'My Post'
     },
+    latitude:{
+        type: String,
+        required: true,
+        default: '43.700859'
+    },
+    longitude: {
+        type: String,
+        required: true,
+        default: '-72.289398'
+    },
     images: {
         type: String,
         required: true,

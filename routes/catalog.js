@@ -27,6 +27,27 @@ router.get('/', verifyToken, async (req, res) => {
     }
 })
 
+router.post('/', verifyToken, async (req, res) => {
+    try {
+        console.log(req.body)
+        page = req.query.page * 1|| 1
+        limit = req.query.limit * 1|| 9
+        skip = (page - 1) * limit
+        search = Mushrooms.find(req.body).skip(skip).limit(limit)
+        const catalog = await search
+        console.log(catalog)
+        res.json({
+            cataloglength: catalog.length,
+            catalog,
+            page,
+            limit,
+            skip
+        })
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+})
+
 /* Search for a mushroom by its common name (nameCommon)
 Call format - 
 req.query = {

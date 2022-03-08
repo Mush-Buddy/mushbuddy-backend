@@ -12,7 +12,7 @@ router.get('/', verifyToken, async (req, res) => {
     try {
         req.query.limit = req.query.limit || 10
         const users = await Users.find({ username: { $regex: req.query.username } })
-            .limit(req.query.limit).select("username avatar firstName lastName")
+            .limit(req.query.limit).select("-password").populate("followers following",'username email avatar firstName lastName')
         res.json({ users })
     } catch (err) {
         return res.status(500).json({ msg: err.message })
@@ -26,7 +26,7 @@ req.params = { id = id_of_user }
 Returns - User associated with the id */
 router.get('/:id', verifyToken, async (req, res) => {
     try {
-        const user = await Users.findById(req.params.id).select('-password')
+        const user = await Users.findById(req.params.id).select('-password').populate("followers following",'username email avatar firstName lastName')
         if (!user) return res.status(400).json({ msg: "User does not exist." })
         res.json({ user })
     } catch (err) {

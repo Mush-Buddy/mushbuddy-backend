@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
             {
                 username: req.body.username
             }
-        );
+        ).populate("followers following",'username email avatar firstName lastName')
         if (!user) return res.status(400).json({msg:"Wrong User Name"});
 
         const hashed = CryptoJS.AES.decrypt(

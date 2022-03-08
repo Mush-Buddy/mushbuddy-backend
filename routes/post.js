@@ -25,9 +25,9 @@ req.body = { postitems - refer to schema}
 return - post */
 router.post('/',verifyToken, async (req, res) => {
     try {
-        const { title, content, images } = req.body
+        const { title, content, mushroom, images } = req.body
         const newPost = new Posts({
-            title, content, images, user: req.user._id
+            title, content, mushroom, images, user: req.user._id
         })
         await newPost.save()
         res.json({newPost: {...newPost._doc}})
