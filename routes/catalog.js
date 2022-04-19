@@ -29,13 +29,13 @@ router.get('/', verifyToken, async (req, res) => {
 
 router.post('/', verifyToken, async (req, res) => {
     try {
-        console.log(req.body)
+        console.log(req.body);
         page = req.query.page * 1|| 1
         limit = req.query.limit * 1|| 9
         skip = (page - 1) * limit
         search = Mushrooms.find(req.body).skip(skip).limit(limit)
         const catalog = await search
-        console.log(catalog)
+        //console.log(catalog)
         res.json({
             cataloglength: catalog.length,
             catalog,
