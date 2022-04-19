@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
                 username: req.body.username
             }
         ).populate("followers following",'username email avatar firstName lastName')
-        if (!user) return res.status(400).json({msg:"Wrong User Name"});
+        if (!user) return res.status(400).json({msg:"wrong_username"});
 
         const hashed = CryptoJS.AES.decrypt(
             user.password,
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
         );
         const original = hashed.toString(CryptoJS.enc.Utf8);
         const input = req.body.password;
-        if (original != input) return res.status(401).json({msg:"Wrong Password"});
+        if (original != input) return res.status(401).json({msg:"wrong_password"});
 
         const accessToken = jwt.sign(
         {
