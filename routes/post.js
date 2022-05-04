@@ -23,11 +23,14 @@ router.get('/search', verifyToken, async (req, res) => {
 /* CreatePost
 req.body = { postitems - refer to schema}
 return - post */
+
+// probably need to update here
+
 router.post('/',verifyToken, async (req, res) => {
     try {
-        const { title, content, mushroom, images } = req.body
+        const { title, content, mushroom, images, coordinate } = req.body
         const newPost = new Posts({
-            title, content, mushroom, images, user: req.user._id
+            title, content, mushroom, images, coordinate, user: req.user._id
         })
         await newPost.save()
         res.json({newPost: {...newPost._doc}})
