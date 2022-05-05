@@ -24,8 +24,6 @@ router.get('/search', verifyToken, async (req, res) => {
 req.body = { postitems - refer to schema}
 return - post */
 
-// probably need to update here
-
 router.post('/',verifyToken, async (req, res) => {
     try {
         const { title, content, mushroom, images, coordinate } = req.body
@@ -97,25 +95,26 @@ router.get('/', verifyToken, async (req, res) => {
     }
 })
 
-
-
 /* updatePost, update a post by postid
 Must be user's post to update
 Call format - 
 req.params = { id: id of post to update }
 req.body = { fields to update - Refer to schema }*/
 router.patch('/update/:id', verifyToken, async (req, res) => {
+    console.log("got to backend patch");
     try {
-        const { title, content, images } = req.body
+        const { title, content, mushroom, coordinate } = req.body;
+
+        console.log(coordinate);
 
         const post = await Posts.findOneAndUpdate({_id: req.params.id,user:req.user._id}, {
-            title, content, images
+            title, content, mushroom, coordinate
         }).populate("user", "avatar username")
 
         res.json({
             newPost: {
                 ...post._doc,
-                title, content, images
+                title, content, mushroom, coordinate
             }
         })
     } catch (err) {
