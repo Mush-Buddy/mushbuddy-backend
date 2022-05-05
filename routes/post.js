@@ -101,7 +101,6 @@ Call format -
 req.params = { id: id of post to update }
 req.body = { fields to update - Refer to schema }*/
 router.patch('/update/:id', verifyToken, async (req, res) => {
-    console.log("got to backend patch");
     try {
         const { title, content, mushroom, coordinate } = req.body;
 
