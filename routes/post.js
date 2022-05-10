@@ -104,8 +104,6 @@ router.patch('/update/:id', verifyToken, async (req, res) => {
     try {
         const { title, content, mushroom, coordinate } = req.body;
 
-        console.log(coordinate);
-
         const post = await Posts.findOneAndUpdate({_id: req.params.id,user:req.user._id}, {
             title, content, mushroom, coordinate
         }).populate("user", "avatar username")
