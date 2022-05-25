@@ -1,6 +1,6 @@
 // Script to mass upload catalog mushroom posts by csv
 // Path to csv, change to your desired csv
-const csvFilePath='./Sample_data.csv'
+const csvFilePath='./Catalog.csv'
 const csv = require('csvtojson')
 const mongoose = require('mongoose');
 const dotenv = require("dotenv"); 
