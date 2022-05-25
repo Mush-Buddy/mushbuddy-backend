@@ -25,6 +25,11 @@ const postSchema = new mongoose.Schema({
         required: true,
         default: 'No description entered.'
     },
+    date: {
+        type: String,
+        required: true,
+        default: '1/1/2022, 12:00:00 AM'
+    },
     images: {
         type: String,
         required: true,
