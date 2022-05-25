@@ -26,9 +26,9 @@ return - post */
 
 router.post('/',verifyToken, async (req, res) => {
     try {
-        const { title, content, mushroom, images, coordinate } = req.body
+        const { title, content, mushroom, images, coordinate, description } = req.body
         const newPost = new Posts({
-            title, content, mushroom, images, coordinate, user: req.user._id
+            title, content, mushroom, images, coordinate, description, user: req.user._id
         })
         await newPost.save()
         res.json({newPost: {...newPost._doc}})
@@ -102,16 +102,16 @@ req.params = { id: id of post to update }
 req.body = { fields to update - Refer to schema }*/
 router.patch('/update/:id', verifyToken, async (req, res) => {
     try {
-        const { title, content, mushroom, coordinate } = req.body;
+        const { title, content, mushroom, coordinate, description } = req.body;
 
         const post = await Posts.findOneAndUpdate({_id: req.params.id,user:req.user._id}, {
-            title, content, mushroom, coordinate
+            title, content, mushroom, coordinate, description
         }).populate("user", "avatar username")
 
         res.json({
             newPost: {
                 ...post._doc,
-                title, content, mushroom, coordinate
+                title, content, mushroom, coordinate, description
             }
         })
     } catch (err) {
