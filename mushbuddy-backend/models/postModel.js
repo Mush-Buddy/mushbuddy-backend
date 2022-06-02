@@ -25,6 +25,16 @@ const postSchema = new mongoose.Schema({
         required: true,
         default: 'No description entered.'
     },
+    latitude:{
+        type: String,
+        required: true,
+        default: '43.700859'
+    },
+    longitude: {
+        type: String,
+        required: true,
+        default: '-72.289398'
+    },
     date: {
         type: String,
         required: true,
@@ -36,7 +46,8 @@ const postSchema = new mongoose.Schema({
         default: "https://www.pngitem.com/pimgs/m/114-1146463_red-mushroom-png-fantasy-mushrooms-png-transparent-png.png"
     },
     likes: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
-    user: {type: mongoose.Types.ObjectId, ref: 'user'}
+    user: {type: mongoose.Types.ObjectId, ref: 'user'},
+    numComments: {type: Number, required: true, default: 0}
 }, {
     timestamps: true
 })

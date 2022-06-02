@@ -27,10 +27,10 @@ return - post */
 router.post('/',verifyToken, async (req, res) => {
     try {
         const { title, content, mushroom, images, coordinate, description, date } = req.body
+        console.log(req.body)
         const newPost = new Posts({
             title, content, mushroom, images, coordinate, description, date, user: req.user._id
         })
-        //console.log(newPost);
         await newPost.save()
         res.json({newPost: {...newPost._doc}})
     } catch (err) {
@@ -54,7 +54,8 @@ router.get('/:id', verifyToken, async (req, res) => {
             user: search_field
         }).skip(skip).limit(limit)
         const posts = await search.sort('-createdAt')
-        .populate("user", "avatar username")
+        .populate("user likes", "avatar username")
+        .populate('mushroom')
 
         res.json({
             postlength: posts.length,
